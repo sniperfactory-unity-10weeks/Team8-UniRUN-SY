@@ -3,7 +3,7 @@
 // PlayerController는 플레이어 캐릭터로서 Player 게임 오브젝트를 제어한다.
 public class PlayerController : MonoBehaviour {
     public AudioClip deathClip; // 사망시 재생할 오디오 클립
-    public float jumpForce = 700f; // 점프 힘
+    public float jumpForce = 1100f; // 점프 힘
 
     private int jumpCount = 0; // 누적 점프 횟수
     private bool isGrounded = false; // 바닥에 닿았는지 나타냄
@@ -44,6 +44,18 @@ public class PlayerController : MonoBehaviour {
             // 마우스 왼쪽 버튼에서 손을 떼는 순간 && 속도의 y 값이 양수라면 (위로 상승 중)
             // 현재 속도를 절반으로 변경
             playerRigidbody.velocity = playerRigidbody.velocity * 0.5f;
+        }
+
+        else if (Input.GetMouseButtonDown(1))
+        {
+            // 오른쪽으로 이동하는 힘을 가하는 코드
+            float moveSpeed = 4f; // 이동 속도 조절
+
+            // 현재 캐릭터의 속도를 얻어옵니다.
+            Vector2 currentVelocity = playerRigidbody.velocity;
+
+            // 오른쪽으로 이동하는 힘을 가하고, 기존의 수직 속도를 유지합니다.
+            playerRigidbody.velocity = new Vector2(moveSpeed, currentVelocity.y);
         }
 
         // 애니메이터의 Grounded 파라미터를 isGrounded 값으로 갱신

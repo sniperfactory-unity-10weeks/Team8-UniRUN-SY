@@ -665,7 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathClip: {fileID: 8300000, guid: 668a107660fa54fe98e03b698a09aa49, type: 3}
-  jumpForce: 700
+  jumpForce: 1100
 --- !u!1 &860400686
 GameObject:
   m_ObjectHideFlags: 0
