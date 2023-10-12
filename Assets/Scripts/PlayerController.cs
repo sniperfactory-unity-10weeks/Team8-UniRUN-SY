@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour {
     private Animator animator; // 사용할 애니메이터 컴포넌트
     private AudioSource playerAudio; // 사용할 오디오 소스 컴포넌트
 
+    public int maxHealth = 30;  //최대 체력
+    public int getDamage = 10;  //피해량
+
     private void Start() {
         // 게임 오브젝트로부터 사용할 컴포넌트들을 가져와 변수에 할당
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -68,12 +71,24 @@ public class PlayerController : MonoBehaviour {
         GameManager.instance.OnPlayerDead();
     }
 
+    private void TakeDamage(int damage)
+    {
+        maxHealth -= damage;
+        if(maxHealth <= 0)
+        {
+            Debug.Log("Die");
+            Die();
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Dead" && !isDead)
         {
             // 충돌한 상대방의 태그가 Dead이며 아직 사망하지 않았다면 Die() 실행
-            Die();
+            //Die();
+
+            //충돌한 상대방의 태그가 Dead이며 아직 사망하지 않았다면 TakeDamage() 실행
+            TakeDamage(getDamage);
         }
     }
 
