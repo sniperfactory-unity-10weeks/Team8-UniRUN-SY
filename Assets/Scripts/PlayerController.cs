@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     public int maxHealth = 30;  //최대 체력
     public int getDamage = 10;  //피해량
+    private float dieHeight = -8f;  //플레이어가 떨어지면 사망하는 높이
 
     private void Start() {
         // 게임 오브젝트로부터 사용할 컴포넌트들을 가져와 변수에 할당
@@ -51,6 +52,12 @@ public class PlayerController : MonoBehaviour {
 
         // 애니메이터의 Grounded 파라미터를 isGrounded 값으로 갱신
         animator.SetBool("Grounded", isGrounded);
+
+        //플레이어의 높이가 dieHeight 미만이면 Die()
+        if(transform.position.y < dieHeight)
+        {
+            Die();
+        }
     }
 
     private void Die() {
